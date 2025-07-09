@@ -5,8 +5,8 @@
     "install-backend": "cd backend && npm install",
     "install-frontend": "cd frontend && npm install", 
     "install-admin": "cd admin && npm install",
-    "build-frontend": "cd frontend && npm run build",
-    "build-admin": "cd admin && npm run build",
+    "build-frontend": "cd frontend && npx vite build",
+    "build-admin": "cd admin && npx vite build",
     "build": "npm run install-backend && npm run install-frontend && npm run install-admin && npm run build-frontend && npm run build-admin",
     "start": "cd backend && npm start"
   }
