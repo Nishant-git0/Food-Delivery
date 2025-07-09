@@ -2,12 +2,7 @@
   "name": "food-delivery-app",
   "version": "1.0.0",
   "scripts": {
-    "install-backend": "cd backend && npm install",
-    "install-frontend": "cd frontend && npm install", 
-    "install-admin": "cd admin && npm install",
-    "build-frontend": "cd frontend && npx vite build",
-    "build-admin": "cd admin && npx vite build",
-    "build": "npm run install-backend && npm run install-frontend && npm run install-admin && npm run build-frontend && npm run build-admin",
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm install --prefix admin && npm run build --prefix frontend && npm run build --prefix admin",
     "start": "cd backend && npm start"
   }
 }
