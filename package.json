@@ -2,7 +2,7 @@
   "name": "food-delivery-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "npm install -g vite && npm install --prefix frontend && npm install --prefix admin && npm install --prefix backend && cd backend && rm -rf node_modules/bcrypt && npm install bcrypt --build-from-source && cd ../frontend && vite build && cd ../admin && vite build",
+    "build": "npm install -g vite && npm install --prefix frontend && npm install --prefix admin && npm install --prefix backend && cd frontend && vite build && cd ../admin && vite build",
     "start": "cd backend && npm start"
   }
 }
