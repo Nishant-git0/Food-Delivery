@@ -2,9 +2,7 @@
   "name": "food-delivery-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "npm run install-all && npm run build-all",
-    "install-all": "npm install --prefix backend && npm install --prefix frontend && npm install --prefix admin",
-    "build-all": "cd frontend && ./node_modules/.bin/vite build && cd ../admin && ./node_modules/.bin/vite build",
+    "build": "npm install -g vite && npm install --prefix backend && npm install --prefix frontend && npm install --prefix admin && cd frontend && vite build && cd ../admin && vite build",
     "start": "cd backend && npm start"
   }
 }
