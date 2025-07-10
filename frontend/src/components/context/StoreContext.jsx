@@ -1,12 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import axios from 'axios'
+import { API_BASE_URL } from './config.js'  // Add this import
 
 export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
-    const url = "http://localhost:4000";
+    const url = API_BASE_URL;  // Change this line
     const [token,setToken] = useState("");
 
     const [food_list, setFoodList] = useState([]);
@@ -36,9 +37,7 @@ const StoreContextProvider = (props) => {
                 let itemInfo = food_list.find((product) => product._id === item);
                 totalAmount += itemInfo.price * cartItems[item];
             }
-
         }
-
         return totalAmount;
     }
 
@@ -53,7 +52,6 @@ const StoreContextProvider = (props) => {
     }
 
     useEffect(()=>{
-        
         async function loadData(){
             await fetchFoodList();
             if(localStorage.getItem("token")){
