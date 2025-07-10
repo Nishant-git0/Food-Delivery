@@ -7,10 +7,11 @@ import List from './pages/List/List';
 import Orders from './pages/Orders/Orders';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { API_BASE_URL } from './config.js';  // Add this import
 
 const App = () => {
 
-  const url = 'http://localhost:4000';
+  const url = API_BASE_URL;  // Change this line
 
   return (
     <div>
