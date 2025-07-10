@@ -8,10 +8,9 @@ import cartRouter from './routes/cartRoute.js'
 import orderRouter from './routes/orderRoute.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import fs from 'fs'
 
 const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const __dirname = path.dirname(__dirname)
 
 //app config
 const app = express()
@@ -31,48 +30,25 @@ app.use('/api/user', userRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 
-// Debug route to check admin files
-app.get('/debug-admin', (req, res) => {
-    const adminPath = path.join(__dirname, '../admin/dist')
-    
-    try {
-        const files = fs.readdirSync(adminPath)
-        res.json({
-            adminPath: adminPath,
-            files: files,
-            indexExists: fs.existsSync(path.join(adminPath, 'index.html'))
-        })
-    } catch (error) {
-        res.json({ error: error.message })
-    }
+// ADMIN ROUTES MUST COME BEFORE FRONTEND ROUTES
+// Serve admin static files
+app.use('/admin', express.static(path.join(__dirname, '../admin/dist')))
+
+// Handle admin SPA routes
+app.get('/admin/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
-// Test route
-app.get('/admin-test', (req, res) => {
-    res.send('Admin route is working!')
-})
-
-// Serve admin panel at /admin-panel
-app.use('/admin-panel', express.static(path.join(__dirname, '../admin/dist')))
-
-// Direct admin routes
+// Direct admin route
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
-app.get('/admin-panel', (req, res) => {
-    res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
-})
-
-// Handle admin sub-routes
-app.get('/admin-panel/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
-})
-
+// FRONTEND ROUTES COME AFTER ADMIN ROUTES
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
-// Handle frontend routes (must be last)
+// Handle frontend SPA routes (THIS MUST BE LAST)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
 })
