@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import './List.css'
 import axios from 'axios'
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../../config.js'  
 
-const List = ({url}) => {
+const List = () => { 
 
   const [list, setList] = useState([]);
+  const url = API_BASE_URL;  
 
   const fetchList = async () =>{
     const response = await axios.get(`${url}/api/food/list`)
