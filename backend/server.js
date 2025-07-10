@@ -10,7 +10,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)  // Fixed this line
+const __dirname = path.dirname(__filename)
 
 //app config
 const app = express()
@@ -30,25 +30,26 @@ app.use('/api/user', userRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 
-// ADMIN ROUTES MUST COME BEFORE FRONTEND ROUTES
-// Serve admin static files
-app.use('/admin', express.static(path.join(__dirname, '../admin/dist')))
-
-// Handle admin SPA routes
-app.get('/admin/*', (req, res) => {
+// Test route
+app.get('/test-admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
-// Direct admin route
-app.get('/admin', (req, res) => {
+// Serve admin at /dashboard instead of /admin
+app.use('/dashboard', express.static(path.join(__dirname, '../admin/dist')))
+
+app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
-// FRONTEND ROUTES COME AFTER ADMIN ROUTES
+app.get('/dashboard/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
+})
+
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
-// Handle frontend SPA routes (THIS MUST BE LAST)
+// Handle frontend routes (must be last)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
 })
