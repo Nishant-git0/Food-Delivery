@@ -5,10 +5,12 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import { assets } from './../../../../frontend/src/assets/assets';
+import { API_BASE_URL } from '../../config.js'  
 
-const Orders = ({url}) => {
+const Orders = () => {  
 
   const [orders, setOrders] = useState([])
+  const url = API_BASE_URL; 
 
   const fetchAllOrders = async () =>{
     const response = await axios.get(url+"/api/order/list");
