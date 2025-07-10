@@ -30,13 +30,13 @@ app.use('/api/user', userRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 
-// Serve static files for frontend
-app.use(express.static(path.join(__dirname, '../frontend/dist')))
-
 // Serve static files for admin at /admin route
 app.use('/admin', express.static(path.join(__dirname, '../admin/dist')))
 
-// Handle frontend routes
+// Serve static files for frontend
+app.use(express.static(path.join(__dirname, '../frontend/dist')))
+
+// Handle admin routes - this should come BEFORE the frontend catch-all
 app.get('/admin/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
