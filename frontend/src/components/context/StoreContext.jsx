@@ -1,13 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import axios from 'axios'
-import { API_BASE_URL } from './config.js'  // Add this import
-
+import { API_BASE_URL } from '../../config.js' 
 export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
-    const url = API_BASE_URL;  // Change this line
+    const url = API_BASE_URL;
     const [token,setToken] = useState("");
 
     const [food_list, setFoodList] = useState([]);
