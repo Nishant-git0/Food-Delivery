@@ -3,12 +3,12 @@ import './Add.css'
 import { assets } from '../../assets/assets'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { API_BASE_URL } from '../../config.js'  // Add this import
+import { API_BASE_URL } from '../../config.js'  
 
-const Add = () => {  // Remove {url} prop if updating directly
+const Add = () => {  
 
     const [image, setImage] = useState(false);
-    const url = API_BASE_URL;  // Add this line
+    const url = API_BASE_URL; 
     const [data, setData] = useState({
         name:'',
         description:'',
