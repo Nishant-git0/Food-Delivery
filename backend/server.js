@@ -30,19 +30,26 @@ app.use('/api/user', userRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 
-// Serve static files for admin at /admin route
+// Test route to check if admin files exist
+app.get('/admin-test', (req, res) => {
+    res.send('Admin route is working!')
+})
+
+// Serve admin static files
 app.use('/admin', express.static(path.join(__dirname, '../admin/dist')))
 
-// Serve static files for frontend
+// Serve frontend static files
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
-// Handle admin routes - this should come BEFORE the frontend catch-all
+// Admin routes
 app.get('/admin/*', (req, res) => {
+    console.log('Admin route accessed:', req.path)
     res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
-// Handle frontend routes (this should be last)
+// Frontend routes (catch-all - must be last)
 app.get('*', (req, res) => {
+    console.log('Frontend route accessed:', req.path)
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
 })
 
