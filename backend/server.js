@@ -30,26 +30,17 @@ app.use('/api/user', userRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 
-// Test route
-app.get('/test-admin', (req, res) => {
+// Serve admin static assets
+app.use('/admin/assets', express.static(path.join(__dirname, '../admin/dist/assets')))
+
+// Admin route - serve the actual React app
+app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
-// Add this route to test
-app.get('/admin', (req, res) => {
-    res.send(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Admin Test</title>
-        </head>
-        <body>
-            <h1>Admin Route Works!</h1>
-            <p>If you see this, the admin route is working.</p>
-            <p>Admin files path: ${path.join(__dirname, '../admin/dist')}</p>
-        </body>
-        </html>
-    `)
+// Admin sub-routes
+app.get('/admin/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
 // Serve frontend static files
