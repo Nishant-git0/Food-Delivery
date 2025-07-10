@@ -36,4 +36,5 @@ Welcome to the **Full-Stack Food Ordering Application** – a powerful and user-
 
 ## 🚀 Deployment Status
 🛑 Deployment site - https://food-delivery-4u6g.onrender.com
+🛑 Admin site - https://food-delivery-4u6g.onrender.com/admin
 
