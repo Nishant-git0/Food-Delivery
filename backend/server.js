@@ -42,8 +42,7 @@ app.use('/admin', express.static(path.join(__dirname, '../admin/dist')))
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
 // Admin routes
-app.get('/admin/*', (req, res) => {
-    console.log('Admin route accessed:', req.path)
+app.get('/admin/', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
