@@ -35,15 +35,21 @@ app.get('/test-admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
 })
 
-// Serve admin at /dashboard instead of /admin
-app.use('/dashboard', express.static(path.join(__dirname, '../admin/dist')))
-
-app.get('/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
-})
-
-app.get('/dashboard/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../admin/dist/index.html'))
+// Add this route to test
+app.get('/admin', (req, res) => {
+    res.send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Admin Test</title>
+        </head>
+        <body>
+            <h1>Admin Route Works!</h1>
+            <p>If you see this, the admin route is working.</p>
+            <p>Admin files path: ${path.join(__dirname, '../admin/dist')}</p>
+        </body>
+        </html>
+    `)
 })
 
 // Serve frontend static files
